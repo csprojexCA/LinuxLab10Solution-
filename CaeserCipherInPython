@@ -1,0 +1,18 @@
+def caesar(PlainText, shift): 
+  cipher = ""
+  for ch in PlainText:
+    if ch.isalpha():
+      StayInAlphabet = ord(ch) + shift 
+      if StayInAlphabet > ord('z'):
+        StayInAlphabet -= 26
+      LastLetter = chr(StayInAlphabet)
+      cipher += LastLetter
+  chunk = [cipher[i:i+5] for i in range(0, len(cipher), 5)]
+  encrypted_message = ' '.join(chunk)
+  return encrypted_message
+
+
+message = str(input("Enter your message: "))
+message = message.upper()
+shift = int(input("Enter your shift: "))
+print(caesar(message, shift))
