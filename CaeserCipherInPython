@@ -1,18 +1,23 @@
 def caesar(PlainText, shift): 
+  Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   cipher = ""
   for ch in PlainText:
-    if ch.isalpha():
+    if ch in Alphabet:
       StayInAlphabet = ord(ch) + shift 
-      if StayInAlphabet > ord('z'):
+      if StayInAlphabet > ord('Z'):
         StayInAlphabet -= 26
       LastLetter = chr(StayInAlphabet)
       cipher += LastLetter
-  chunk = [cipher[i:i+5] for i in range(0, len(cipher), 5)]
-  encrypted_message = ' '.join(chunk)
-  return encrypted_message
-
+  return cipher
 
 message = str(input("Enter your message: "))
 message = message.upper()
 shift = int(input("Enter your shift: "))
-print(caesar(message, shift))
+encrypted_message = caesar(message, shift)
+ListOfChunks = [encrypted_message[i:i+5] for i in range(0, len(encrypted_message), 5)]
+
+for index,chunk in enumerate(ListOfChunks):
+    if (index+1)%10 == 0:
+        print(chunk,end='\n')
+    else:
+        print(chunk,end=' ')
